@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+        <!-- Declare ViewModel or other data binding variables here if needed -->
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        tools:context=".view.AddEditTaskActivity">
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/taskTitleInputLayout"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:layout_margin="16dp">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/taskTitleInput"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="Task Title" />
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/taskDescriptionInputLayout"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            app:layout_constraintTop_toBottomOf="@id/taskTitleInputLayout"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:layout_margin="16dp">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/taskDescriptionInput"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="Task Description" />
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <Spinner
+            android:id="@+id/prioritySpinner"
+            android:layout_width="match_parent"
+            android:layout_height="48dp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:backgroundTintMode="add"
+            app:layout_constraintTop_toBottomOf="@id/taskDescriptionInputLayout"
+            app:layout_constraintBottom_toTopOf="@id/taskCompleted"
+            android:layout_marginHorizontal="16dp"
+            android:layout_marginBottom="16dp"
+            android:entries="@array/priority_items" />
+
+        <com.google.android.material.checkbox.MaterialCheckBox
+            android:id="@+id/taskCompleted"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Completed"
+            app:layout_constraintTop_toBottomOf="@id/prioritySpinner"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:layout_marginTop="16dp" />
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/saveButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Save"
+            app:layout_constraintTop_toBottomOf="@id/taskCompleted"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:layout_marginTop="16dp" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

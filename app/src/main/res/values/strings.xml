@@ -1,0 +1,5 @@
+<resources>
+    <string name="app_name">ToDo App</string>
+    <string name="add_task">Add task</string>
+    <string name="no_tasks_available">No tasks available</string>
+</resources>
