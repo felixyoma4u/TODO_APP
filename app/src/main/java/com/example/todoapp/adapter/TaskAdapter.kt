@@ -51,11 +51,11 @@ class TaskAdapter(private val viewModel: TaskViewModel): RecyclerView.Adapter<Ta
                 taskDescription.text = task.description
                 taskPriority.text = task.priority
                 taskDate.text = task.formatDate()
-                taskCompleted.isChecked = task.isCompleted
+                taskStatus.isChecked = task.isCompleted
 
-                taskCompleted.setOnCheckedChangeListener { _, isChecked ->
-                    val updateTask = task.copy(isCompleted = isChecked)
-                    viewModel.update(updateTask)
+                taskStatus.setOnClickListener {
+                    task.isCompleted = taskStatus.isChecked
+                    viewModel.update(task)
                 }
             }
         }
@@ -64,7 +64,7 @@ class TaskAdapter(private val viewModel: TaskViewModel): RecyclerView.Adapter<Ta
             val position = adapterPosition
             if (position != RecyclerView.NO_POSITION){
                 itemView.context.startActivity(Intent(itemView.context, AddEditTaskActivity::class.java ).apply {
-                    putExtra("TASK_ID", tasksList[position].id?.toInt())
+                    putExtra("TASK_ID", tasksList[position].id)
                     putExtra("TASK_TITLE", tasksList[position].title)
                     putExtra("TASK_DESCRIPTION", tasksList[position].description)
                     putExtra("TASK_PRIORITY", tasksList[position].priority)

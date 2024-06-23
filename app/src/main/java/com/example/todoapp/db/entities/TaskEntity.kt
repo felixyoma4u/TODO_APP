@@ -8,12 +8,12 @@ import java.util.Locale
 
 @Entity(tableName = "tasks")
 data class TaskEntity(
-    @PrimaryKey(autoGenerate = true) val id: Long? = null,
-    val title: String,
-    val description: String,
-    val isCompleted: Boolean = false,
-    val priority: String,
-    val date: Long = System.currentTimeMillis() // Default date is current time
+    @PrimaryKey(autoGenerate = true) val id: Int? = null,
+    var title: String,
+    var description: String,
+    var isCompleted: Boolean,
+    var priority: String,
+    var date: Long = System.currentTimeMillis() // Default date is current time
 ){
     fun formatDate(): String{
         val sdf = SimpleDateFormat("dd/MMM/yyyy HH:mm:ss", Locale.getDefault())

@@ -2,4 +2,9 @@
     <string name="app_name">ToDo App</string>
     <string name="add_task">Add task</string>
     <string name="no_tasks_available">No tasks available</string>
+    <string name="task_description">Task Description</string>
+    <string name="task_title">Task Title</string>
+    <string name="task_date">Task Date</string>
+    <string name="priority">Priority</string>
+    <string name="completed">Completed</string>
 </resources>

@@ -46,7 +46,7 @@ class AddEditTaskActivity : AppCompatActivity() {
             binding.run {
                 taskTitleInput.setText(intent.getStringExtra("TASK_TITLE"))
                 taskDescriptionInput.setText(intent.getStringExtra("TASK_DESCRIPTION"))
-                taskCompleted.isChecked = intent.getBooleanExtra("TASK_COMPLETED", false)
+                taskCompleted.isChecked = intent.getBooleanExtra("TASK_IS_COMPLETED", false)
                 val priority = intent.getStringExtra("TASK_PRIORITY")
                 prioritySpinner.setSelection(
                     resources.getStringArray(R.array.priority_items).indexOf(priority)
@@ -66,19 +66,19 @@ class AddEditTaskActivity : AppCompatActivity() {
         val title = binding.taskTitleInput.text.toString().trim()
         val description = binding.taskDescriptionInput.text.toString().trim()
         val priority = binding.prioritySpinner.selectedItem.toString()
-        val isCompleted = binding.taskCompleted.isActivated
+        val isCompleted = binding.taskCompleted.isChecked
         if (title.isBlank() || description.isBlank()) {
             Toast.makeText(this, "Please enter a title and description", Toast.LENGTH_SHORT).show()
             return
         }
         val task = TaskEntity(
-            id = taskId?.toLong() ?: 0,
+            id = taskId,
             title = title,
             description = description,
             priority = priority,
             isCompleted = isCompleted,
         )
-        if (taskId != -1){
+        if (taskId != -1 ){
             viewModel.update(task)
             Toast.makeText(this, "Task updated", Toast.LENGTH_SHORT).show()
         }else{

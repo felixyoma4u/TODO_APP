@@ -110,26 +110,21 @@ class TaskActivity : AppCompatActivity() {
         val filterOptions = arrayOf("All", "Completed", "In Progress")
         MaterialAlertDialogBuilder(this)
             .setTitle("Filter Tasks")
-            .setItems(filterOptions) { dialog, item ->
-                val isCompleted = when (item) {
-                    0 -> null
-                    1 -> true
-                    2 -> false
-                    else -> null
-                }
+            .setItems(filterOptions) { _, item ->
 
-                if (isCompleted != null) {
-                    viewModel.getTasksByStatus(isCompleted).observe(this@TaskActivity) { tasks ->
-                        tasks?.let {
-                            adapter.onInsert(it)
-                        }
+                when (filterOptions[item]) {
+                    "Completed" -> {
+                        getTaskByStatus(true)
                     }
-                } else {
-                    viewModel.allTasks.observe(this@TaskActivity) { tasks ->
-                        tasks?.let {
-                            adapter.onInsert(it)
-                        }
+
+                    "In Progress" -> {
+                        getTaskByStatus(false)
                     }
+
+                    else -> {
+                        getAllTask()
+                    }
+
                 }
             }
             .show()
@@ -139,17 +134,9 @@ class TaskActivity : AppCompatActivity() {
         val sortOptions = arrayOf("All", "High Priority", "Medium Priority", "Low Priority")
         MaterialAlertDialogBuilder(this)
             .setTitle("Sort Tasks")
-            .setItems(sortOptions) { dialog, which ->
+            .setItems(sortOptions) { _, which ->
 
                 when (which) {
-                    0 -> {
-                        viewModel.allTasks.observe(this@TaskActivity) { tasks ->
-                            tasks?.let {
-                                adapter.onInsert(it)
-                            }
-                        }
-                    }
-
                     1 -> {
                         getPriorityList("High")
                     }
@@ -161,6 +148,10 @@ class TaskActivity : AppCompatActivity() {
                     3 -> {
                         getPriorityList("Low")
                     }
+
+                    else -> {
+                        getAllTask()
+                    }
                 }
             }
             .show()
@@ -169,6 +160,22 @@ class TaskActivity : AppCompatActivity() {
 
     private fun getPriorityList(priority: String) {
         viewModel.getTasksByPriority(priority).observe(this@TaskActivity) { tasks ->
+            tasks?.let {
+                adapter.onInsert(it)
+            }
+        }
+    }
+
+    private fun getAllTask() {
+        viewModel.allTasks.observe(this@TaskActivity) { tasks ->
+            tasks?.let {
+                adapter.onInsert(it)
+            }
+        }
+    }
+
+    private fun getTaskByStatus(status: Boolean) {
+        viewModel.getTasksByStatus(status).observe(this@TaskActivity) { tasks ->
             tasks?.let {
                 adapter.onInsert(it)
             }
