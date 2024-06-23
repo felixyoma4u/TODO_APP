@@ -21,6 +21,9 @@ interface TaskDao {
     @Query("SELECT * FROM tasks WHERE priority = :priority ORDER BY date DESC")
     fun getTasksByPriority(priority: String): LiveData<List<TaskEntity>>
 
+    @Query("SELECT * FROM tasks WHERE id = :id")
+    fun getTaskById(id: Int): LiveData<TaskEntity>
+
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     suspend fun insertTask(task: TaskEntity)
 

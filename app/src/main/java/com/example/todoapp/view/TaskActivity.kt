@@ -1,7 +1,10 @@
 package com.example.todoapp.view
 
+import android.content.Context
 import android.content.Intent
+import android.net.ConnectivityManager
 import android.os.Bundle
+import android.util.Log
 import android.view.Menu
 import android.view.MenuItem
 import android.view.View
@@ -23,9 +26,10 @@ import com.example.todoapp.viewmodel.TaskViewModelFactory
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
 
 class TaskActivity : AppCompatActivity() {
+
+    // Declaration of variables
     private lateinit var binding: ActivityTaskBinding
     private lateinit var adapter: TaskAdapter
-
     private val viewModel: TaskViewModel by viewModels() {
         val db = TaskDatabase.getDatabase(this)
         val repository = TaskRepository(db.taskDao())
@@ -34,16 +38,13 @@ class TaskActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-//        enableEdgeToEdge()
+
         binding = ActivityTaskBinding.inflate(layoutInflater)
         setContentView(binding.root)
-//        ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main)) { v, insets ->
-//            val systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars())
-//            v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom)
-//            insets
-//        }
-
         setSupportActionBar(findViewById<Toolbar>(R.id.topAppBar))
+
+        checkInternet()
+
         adapter = TaskAdapter(viewModel)
 
         binding.run {
@@ -65,6 +66,9 @@ class TaskActivity : AppCompatActivity() {
             }
 
         }
+
+
+        // this is a item touch listener that work with the recycler view to enable swipe to delete
 
         ItemTouchHelper(object : ItemTouchHelper.SimpleCallback(0, ItemTouchHelper.LEFT) {
             override fun onMove(
@@ -179,6 +183,22 @@ class TaskActivity : AppCompatActivity() {
             tasks?.let {
                 adapter.onInsert(it)
             }
+        }
+    }
+
+// Connectivity checker
+
+    private fun checkInternet() {
+        val connectionManager =
+            getSystemService(Context.CONNECTIVITY_SERVICE) as ConnectivityManager
+        val networkInfo = connectionManager.activeNetworkInfo
+        if (networkInfo != null && networkInfo.isConnected) {
+            Log.d("Network", "Network Available")
+        } else {
+            MaterialAlertDialogBuilder(this)
+                .setTitle("Network Not Available")
+                .setMessage("Please check your internet connection")
+                .show()
         }
     }
 }

@@ -13,7 +13,8 @@ data class TaskEntity(
     var description: String,
     var isCompleted: Boolean,
     var priority: String,
-    var date: Long = System.currentTimeMillis() // Default date is current time
+    var date: Long = System.currentTimeMillis(), // Default date is current time
+    var reminderTime: Long? = null
 ){
     fun formatDate(): String{
         val sdf = SimpleDateFormat("dd/MMM/yyyy HH:mm:ss", Locale.getDefault())

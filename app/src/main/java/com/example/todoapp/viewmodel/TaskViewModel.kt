@@ -11,7 +11,7 @@ import kotlinx.coroutines.launch
 
 class TaskViewModel(
     private val repository: TaskRepository
-): ViewModel() {
+) : ViewModel() {
 
     private val job = Job()
     private val coroutineScope = CoroutineScope(job + Dispatchers.IO)
@@ -21,6 +21,8 @@ class TaskViewModel(
     fun getTasksByStatus(isCompleted: Boolean) = repository.getTasksByStatus(isCompleted)
 
     fun getTasksByPriority(priority: String) = repository.getTasksByPriority(priority)
+
+    fun getTaskById(id: Int) = repository.getTaskById(id)
 
     fun insert(task: TaskEntity) {
         coroutineScope.launch {
