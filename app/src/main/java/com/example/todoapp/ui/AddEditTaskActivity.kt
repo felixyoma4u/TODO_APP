@@ -1,4 +1,4 @@
-package com.example.todoapp.view
+package com.example.todoapp.ui
 
 import android.annotation.SuppressLint
 import android.app.AlarmManager
@@ -9,30 +9,27 @@ import android.content.Intent
 import android.os.Bundle
 import android.widget.ArrayAdapter
 import android.widget.Toast
-import androidx.activity.enableEdgeToEdge
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
-import androidx.core.view.ViewCompat
-import androidx.core.view.WindowInsetsCompat
 import com.example.todoapp.R
 import com.example.todoapp.databinding.ActivityAddEditTaskBinding
-import com.example.todoapp.db.TaskDatabase
-import com.example.todoapp.db.entities.TaskEntity
-import com.example.todoapp.repository.TaskRepository
+import com.example.todoapp.data.TaskDatabase
+import com.example.todoapp.model.TaskEntity
+import com.example.todoapp.data.repository.TaskRepository
 import com.example.todoapp.utils.NotificationReceiver
 import com.example.todoapp.viewmodel.TaskViewModel
 import com.example.todoapp.viewmodel.TaskViewModelFactory
-import com.google.firebase.auth.FirebaseAuth
 import java.text.SimpleDateFormat
 import java.util.Calendar
 import java.util.Date
 import java.util.Locale
 
 class AddEditTaskActivity : AppCompatActivity() {
+
+    // creating of variable instances
     private lateinit var binding: ActivityAddEditTaskBinding
     private var taskId: Int? = null
     private var reminderTime: Long? = null
-
     private val viewModel: TaskViewModel by viewModels() {
         val db = TaskDatabase.getDatabase(this)
         val repository = TaskRepository(db.taskDao())
@@ -54,6 +51,8 @@ class AddEditTaskActivity : AppCompatActivity() {
             binding.taskPriority.adapter = adapter
         }
 
+        // updating of task by using the task id to fetch the task to be updated
+
         taskId = intent.getIntExtra("TASK_ID", -1).takeIf { it != -1 }
 
         taskId?.let {
@@ -69,20 +68,9 @@ class AddEditTaskActivity : AppCompatActivity() {
                     taskCompletedCheckbox.isChecked = task.isCompleted
                 }
             }
-
-//        if (taskId == null) {
-//            binding.run {
-//                taskTitleInput.setText(intent.getStringExtra("TASK_TITLE"))
-//                taskDescriptionInput.setText(intent.getStringExtra("TASK_DESCRIPTION"))
-//                taskCompleted.isChecked = intent.getBooleanExtra("TASK_IS_COMPLETED", false)
-//                val priority = intent.getStringExtra("TASK_PRIORITY")
-//                prioritySpinner.setSelection(
-//                    resources.getStringArray(R.array.priority_items).indexOf(priority)
-//                )
-//            }
-//        }
         }
 
+// Actions button to used for saving, updating and displaying time picker dialog
         binding.run {
             setReminderButton.setOnClickListener { showTimePickerDialog() }
             saveButton.setOnClickListener { saveTask() }
@@ -90,6 +78,7 @@ class AddEditTaskActivity : AppCompatActivity() {
 
     }
 
+    // this function contains the logic for the saving, updating and scheduling notification
     private fun saveTask() {
         val title = binding.taskTitle.text.toString().trim()
         val description = binding.taskDescription.text.toString().trim()
@@ -121,7 +110,7 @@ class AddEditTaskActivity : AppCompatActivity() {
         finish()
     }
 
-
+    // The time picker logic
     private fun showTimePickerDialog() {
         val calendar = Calendar.getInstance()
         val timePickerDialog = TimePickerDialog(this, { _, hourOfDay, minute ->

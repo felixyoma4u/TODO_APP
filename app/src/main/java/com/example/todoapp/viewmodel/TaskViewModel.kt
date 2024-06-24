@@ -2,8 +2,8 @@ package com.example.todoapp.viewmodel
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.ViewModel
-import com.example.todoapp.db.entities.TaskEntity
-import com.example.todoapp.repository.TaskRepository
+import com.example.todoapp.model.TaskEntity
+import com.example.todoapp.data.repository.TaskRepository
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.Job

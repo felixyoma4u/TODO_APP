@@ -1,14 +1,13 @@
-package com.example.todoapp.adapter
+package com.example.todoapp.ui.adapter
 
 import android.content.Intent
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.example.todoapp.databinding.ItemTaskBinding
-import com.example.todoapp.db.entities.TaskEntity
-import com.example.todoapp.view.AddEditTaskActivity
+import com.example.todoapp.model.TaskEntity
+import com.example.todoapp.ui.AddEditTaskActivity
 import com.example.todoapp.viewmodel.TaskViewModel
 
 class TaskAdapter(private val viewModel: TaskViewModel): RecyclerView.Adapter<TaskAdapter.TaskViewHolder>() {
@@ -35,7 +34,7 @@ class TaskAdapter(private val viewModel: TaskViewModel): RecyclerView.Adapter<Ta
         notifyDataSetChanged()
     }
 
-    fun getTaskAtPosition(postion: Int): TaskEntity{
+    fun getTaskAtPosition(postion: Int): TaskEntity {
         return tasksList[postion]
     }
 

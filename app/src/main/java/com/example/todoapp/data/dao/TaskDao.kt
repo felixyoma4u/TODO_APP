@@ -1,4 +1,4 @@
-package com.example.todoapp.db.dao
+package com.example.todoapp.data.dao
 
 import androidx.lifecycle.LiveData
 import androidx.room.Dao
@@ -7,7 +7,7 @@ import androidx.room.Insert
 import androidx.room.OnConflictStrategy
 import androidx.room.Query
 import androidx.room.Update
-import com.example.todoapp.db.entities.TaskEntity
+import com.example.todoapp.model.TaskEntity
 
 @Dao
 interface TaskDao {

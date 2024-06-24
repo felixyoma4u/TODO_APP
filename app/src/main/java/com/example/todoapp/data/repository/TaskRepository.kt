@@ -1,9 +1,8 @@
-package com.example.todoapp.repository
+package com.example.todoapp.data.repository
 
 import androidx.lifecycle.LiveData
-import com.example.todoapp.db.dao.TaskDao
-import com.example.todoapp.db.entities.TaskEntity
-import com.google.firebase.Firebase
+import com.example.todoapp.data.dao.TaskDao
+import com.example.todoapp.model.TaskEntity
 import com.google.firebase.firestore.FirebaseFirestore
 
 class TaskRepository(private val taskDoo: TaskDao) {

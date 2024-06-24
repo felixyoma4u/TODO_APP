@@ -1,11 +1,11 @@
-package com.example.todoapp.db
+package com.example.todoapp.data
 
 import android.content.Context
 import androidx.room.Database
 import androidx.room.Room
 import androidx.room.RoomDatabase
-import com.example.todoapp.db.dao.TaskDao
-import com.example.todoapp.db.entities.TaskEntity
+import com.example.todoapp.data.dao.TaskDao
+import com.example.todoapp.model.TaskEntity
 
 @Database(entities = [TaskEntity::class], version = 1)
 abstract class TaskDatabase: RoomDatabase(){
@@ -16,7 +16,7 @@ abstract class TaskDatabase: RoomDatabase(){
         @Volatile
         private var INSTANCE: TaskDatabase? = null
 
-        fun getDatabase(context: Context): TaskDatabase{
+        fun getDatabase(context: Context): TaskDatabase {
             return INSTANCE ?: synchronized(this){
                 val instance = Room.databaseBuilder(
                     context.applicationContext,

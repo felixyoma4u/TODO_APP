@@ -1,4 +1,4 @@
-package com.example.todoapp.view
+package com.example.todoapp.ui
 
 import android.content.Context
 import android.content.Intent
@@ -9,7 +9,6 @@ import android.view.Menu
 import android.view.MenuItem
 import android.view.View
 import android.widget.Toast
-import androidx.activity.enableEdgeToEdge
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.Toolbar
@@ -17,10 +16,10 @@ import androidx.recyclerview.widget.ItemTouchHelper
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.todoapp.R
-import com.example.todoapp.adapter.TaskAdapter
+import com.example.todoapp.ui.adapter.TaskAdapter
 import com.example.todoapp.databinding.ActivityTaskBinding
-import com.example.todoapp.db.TaskDatabase
-import com.example.todoapp.repository.TaskRepository
+import com.example.todoapp.data.TaskDatabase
+import com.example.todoapp.data.repository.TaskRepository
 import com.example.todoapp.viewmodel.TaskViewModel
 import com.example.todoapp.viewmodel.TaskViewModelFactory
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
