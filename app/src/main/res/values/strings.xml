@@ -7,4 +7,8 @@
     <string name="task_date">Task Date</string>
     <string name="priority">Priority</string>
     <string name="completed">Completed</string>
+    <string name="reminder_time">Reminder Time</string>
+    <string name="no_reminder_set">No reminder set</string>
+    <string name="set_reminder">Set Reminder</string>
+    <string name="save">Save</string>
 </resources>

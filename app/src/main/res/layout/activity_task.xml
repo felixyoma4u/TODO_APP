@@ -24,8 +24,7 @@
                 android:id="@+id/topAppBar"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:background="?attr/colorPrimary"
-                android:theme="?attr/actionBarTheme"
+                android:background="@color/btn_color"
                 app:title="ToDo List"
                 app:titleTextColor="@android:color/white"
                 app:menu="@menu/top_app_bar_menu" />
@@ -58,6 +57,7 @@
             android:layout_height="wrap_content"
             android:contentDescription="@string/add_task"
             android:src="@drawable/ic_add"
+            app:backgroundTint="@color/btn_color"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             android:layout_marginRight="16dp"

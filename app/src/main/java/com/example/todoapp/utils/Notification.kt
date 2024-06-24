@@ -6,6 +6,7 @@ import android.content.BroadcastReceiver
 import android.content.Context
 import android.content.Intent
 import androidx.core.app.NotificationCompat
+import com.example.todoapp.ui.TaskActivity
 
 class NotificationReceiver: BroadcastReceiver(){
 
@@ -16,14 +17,18 @@ class NotificationReceiver: BroadcastReceiver(){
         val description = intent.getStringExtra("description")
 
         if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.O){
-            val channel = NotificationChannel("todo_channel", "ToDo Notification", NotificationManager.IMPORTANCE_HIGH)
+            val channel = NotificationChannel("todo_channel", "ToDo Notification", NotificationManager.IMPORTANCE_DEFAULT)
             notificationManager.createNotificationChannel(channel)
         }
+
 
         val notification = NotificationCompat.Builder(context, "todo_channel")
             .setContentTitle(title)
             .setContentText(description)
             .setSmallIcon(android.R.drawable.ic_dialog_info)
+            .setStyle(NotificationCompat.BigTextStyle().bigText(description))
+            .setPriority(NotificationCompat.PRIORITY_DEFAULT)
+            .setAutoCancel(true)
             .build()
 
         notificationManager.notify(notificationId, notification)

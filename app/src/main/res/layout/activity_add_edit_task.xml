@@ -21,7 +21,7 @@
                 android:id="@+id/task_title"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:hint="Task Title" />
+                android:hint="@string/task_title" />
         </com.google.android.material.textfield.TextInputLayout>
 
         <com.google.android.material.textfield.TextInputLayout
@@ -39,7 +39,7 @@
                 android:id="@+id/task_description"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:hint="Task Description" />
+                android:hint="@string/task_description" />
         </com.google.android.material.textfield.TextInputLayout>
 
         <com.google.android.material.textfield.TextInputLayout
@@ -68,7 +68,7 @@
             android:layout_marginTop="16dp"
             android:layout_marginStart="16dp"
             android:layout_marginEnd="16dp"
-            android:text="Reminder Time"
+            android:text="@string/reminder_time"
             app:layout_constraintTop_toBottomOf="@+id/task_priority_layout"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent" />
@@ -78,7 +78,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
-            android:text="No reminder set"
+            android:text="@string/no_reminder_set"
             app:layout_constraintTop_toBottomOf="@+id/reminder_time_label"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent" />
@@ -88,7 +88,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
-            android:text="Set Reminder"
+            android:text="@string/set_reminder"
+            android:backgroundTint="@color/btn_color"
             app:layout_constraintTop_toBottomOf="@+id/reminder_time_text_view"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent" />
@@ -98,7 +99,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="16dp"
-            android:text="Completed"
+            android:text="@string/completed"
+            android:buttonTint="@color/btn_color"
             app:layout_constraintTop_toBottomOf="@+id/set_reminder_button"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent" />
@@ -108,7 +110,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="16dp"
-            android:text="Save"
+            android:text="@string/save"
+            android:backgroundTint="#007F5F"
             app:layout_constraintTop_toBottomOf="@+id/task_completed_checkbox"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent" />
