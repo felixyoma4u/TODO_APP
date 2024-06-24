@@ -2,6 +2,7 @@ package com.example.todoapp.utils
 
 import android.app.NotificationChannel
 import android.app.NotificationManager
+import android.app.PendingIntent
 import android.content.BroadcastReceiver
 import android.content.Context
 import android.content.Intent
@@ -21,6 +22,10 @@ class NotificationReceiver: BroadcastReceiver(){
             notificationManager.createNotificationChannel(channel)
         }
 
+        val launchIntent = Intent(context, TaskActivity::class.java)
+        val paddingIntent = PendingIntent.getActivity(context, 0, launchIntent, PendingIntent.FLAG_UPDATE_CURRENT)
+
+
 
         val notification = NotificationCompat.Builder(context, "todo_channel")
             .setContentTitle(title)
@@ -29,6 +34,7 @@ class NotificationReceiver: BroadcastReceiver(){
             .setStyle(NotificationCompat.BigTextStyle().bigText(description))
             .setPriority(NotificationCompat.PRIORITY_DEFAULT)
             .setAutoCancel(true)
+            .setContentIntent(paddingIntent)
             .build()
 
         notificationManager.notify(notificationId, notification)

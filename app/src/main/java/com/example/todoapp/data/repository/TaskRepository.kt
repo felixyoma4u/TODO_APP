@@ -21,20 +21,21 @@ class TaskRepository(private val taskDoo: TaskDao) {
 
     suspend fun insertTask(task: TaskEntity) {
         taskDoo.insertTask(task)
-//        db.collection("tasks").document(task.id.toString()).set(task)
-        db.collection("tasks").add(task)
+// Get the auto-generated ID after inserting into Room
+        val taskId = task.id ?: return
+        db.collection("tasks").document(taskId.toString()).set(task)
     }
 
     suspend fun updateTask(task: TaskEntity) {
         taskDoo.updateTask(task)
-//        db.collection("tasks").document(task.id.toString()).set(task)
-        db.collection("tasks").add(task)
+        val taskId = task.id ?: return
+        db.collection("tasks").document(taskId.toString()).set(task)
     }
 
     suspend fun deleteTask(task: TaskEntity) {
         taskDoo.deleteTask(task)
-//        db.collection("tasks").document(task.id.toString()).delete()
-        db.collection("tasks").add(task)
+        val taskId = task.id ?: return
+        db.collection("tasks").document(taskId.toString()).delete()
     }
 
 
