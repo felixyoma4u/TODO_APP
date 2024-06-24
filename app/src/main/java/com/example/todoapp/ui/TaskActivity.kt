@@ -42,8 +42,6 @@ class TaskActivity : AppCompatActivity() {
         setContentView(binding.root)
         setSupportActionBar(findViewById<Toolbar>(R.id.topAppBar))
 
-        checkInternet()
-
         adapter = TaskAdapter(viewModel)
 
         binding.run {
@@ -86,6 +84,11 @@ class TaskActivity : AppCompatActivity() {
         }).attachToRecyclerView(binding.recyclerViewTask)
 
 
+    }
+
+    override fun onResume() {
+        super.onResume()
+        checkInternet()
     }
 
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {

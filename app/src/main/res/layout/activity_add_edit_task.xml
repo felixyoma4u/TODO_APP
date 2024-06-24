@@ -56,7 +56,7 @@
             <Spinner
                 android:id="@+id/task_priority"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="48dp"
                 android:backgroundTintMode="add"
                 android:entries="@array/priority_items" />
         </com.google.android.material.textfield.TextInputLayout>
@@ -89,7 +89,6 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
             android:text="@string/set_reminder"
-            android:backgroundTint="@color/btn_color"
             app:layout_constraintTop_toBottomOf="@+id/reminder_time_text_view"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent" />
@@ -100,7 +99,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="16dp"
             android:text="@string/completed"
-            android:buttonTint="@color/btn_color"
+            android:buttonTint="?attr/colorPrimary"
             app:layout_constraintTop_toBottomOf="@+id/set_reminder_button"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent" />
@@ -111,7 +110,6 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="16dp"
             android:text="@string/save"
-            android:backgroundTint="#007F5F"
             app:layout_constraintTop_toBottomOf="@+id/task_completed_checkbox"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent" />
