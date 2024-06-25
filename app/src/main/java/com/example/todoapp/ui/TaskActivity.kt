@@ -18,31 +18,30 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.todoapp.R
 import com.example.todoapp.ui.adapter.TaskAdapter
 import com.example.todoapp.databinding.ActivityTaskBinding
-import com.example.todoapp.data.TaskDatabase
-import com.example.todoapp.data.repository.TaskRepository
 import com.example.todoapp.viewmodel.TaskViewModel
-import com.example.todoapp.viewmodel.TaskViewModelFactory
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 class TaskActivity : AppCompatActivity() {
 
     // Declaration of variables
+    private val viewModel: TaskViewModel by viewModels()
     private lateinit var binding: ActivityTaskBinding
     private lateinit var adapter: TaskAdapter
-    private val viewModel: TaskViewModel by viewModels() {
-        val db = TaskDatabase.getDatabase(this)
-        val repository = TaskRepository(db.taskDao())
-        TaskViewModelFactory(repository)
-    }
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-
+        // Binding the layout
         binding = ActivityTaskBinding.inflate(layoutInflater)
         setContentView(binding.root)
+        // Setting up the toolbar
         setSupportActionBar(findViewById<Toolbar>(R.id.topAppBar))
 
+        // Setting up the recycler view
         adapter = TaskAdapter(viewModel)
+
 
         binding.run {
             // ... recycler view setup
@@ -54,6 +53,7 @@ class TaskActivity : AppCompatActivity() {
             }
         }
 
+        // observing the data from the database and updating the recycler view
         viewModel.run {
             allTasks.observe(this@TaskActivity) { tasks ->
                 tasks?.let {
@@ -66,7 +66,6 @@ class TaskActivity : AppCompatActivity() {
 
 
         // this is a item touch listener that work with the recycler view to enable swipe to delete
-
         ItemTouchHelper(object : ItemTouchHelper.SimpleCallback(0, ItemTouchHelper.LEFT) {
             override fun onMove(
                 recyclerView: RecyclerView,
@@ -112,6 +111,7 @@ class TaskActivity : AppCompatActivity() {
         }
     }
 
+    // function to show the filter dialog
     private fun showFilterDialog() {
         val filterOptions = arrayOf("All", "Completed", "In Progress")
         MaterialAlertDialogBuilder(this)
@@ -136,6 +136,7 @@ class TaskActivity : AppCompatActivity() {
             .show()
     }
 
+    // function to show the sort dialog
     private fun showSortDialog() {
         val sortOptions = arrayOf("All", "High Priority", "Medium Priority", "Low Priority")
         MaterialAlertDialogBuilder(this)
@@ -164,6 +165,7 @@ class TaskActivity : AppCompatActivity() {
     }
 
 
+    // function to get the tasks by priority
     private fun getPriorityList(priority: String) {
         viewModel.getTasksByPriority(priority).observe(this@TaskActivity) { tasks ->
             tasks?.let {
@@ -172,6 +174,7 @@ class TaskActivity : AppCompatActivity() {
         }
     }
 
+    // function to get all the tasks
     private fun getAllTask() {
         viewModel.allTasks.observe(this@TaskActivity) { tasks ->
             tasks?.let {
@@ -180,6 +183,7 @@ class TaskActivity : AppCompatActivity() {
         }
     }
 
+    // function to get the tasks by status
     private fun getTaskByStatus(status: Boolean) {
         viewModel.getTasksByStatus(status).observe(this@TaskActivity) { tasks ->
             tasks?.let {
@@ -188,8 +192,7 @@ class TaskActivity : AppCompatActivity() {
         }
     }
 
-// Connectivity checker
-
+    // function to check the internet connection
     private fun checkInternet() {
         val connectionManager =
             getSystemService(Context.CONNECTIVITY_SERVICE) as ConnectivityManager

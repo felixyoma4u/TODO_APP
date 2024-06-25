@@ -2,7 +2,9 @@ plugins {
     alias(libs.plugins.android.application)
     alias(libs.plugins.jetbrains.kotlin.android)
     id("com.google.gms.google-services")
+    id("com.google.dagger.hilt.android")
     alias(libs.plugins.kapt)
+    id("kotlin-kapt")
 }
 
 android {
@@ -59,6 +61,9 @@ dependencies {
     testImplementation(libs.androidx.core.testing)
     testImplementation(libs.kotlinx.coroutines.test)
 
+    // dagger hilt dependency
+    implementation(libs.hilt.android)
+    kapt(libs.hilt.android.compiler)
 
 
     //Room
@@ -71,4 +76,9 @@ dependencies {
     implementation(libs.firebase.analytics)
 
 
+}
+
+// Allow references to generated code
+kapt {
+    correctErrorTypes = true
 }

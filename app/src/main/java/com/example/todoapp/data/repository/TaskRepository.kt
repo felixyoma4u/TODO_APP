@@ -6,8 +6,9 @@ import com.example.todoapp.model.TaskEntity
 import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase
+import javax.inject.Inject
 
-class TaskRepository(private val taskDoo: TaskDao) {
+class TaskRepository @Inject constructor(private val taskDoo: TaskDao) {
 
     val allTasks: LiveData<List<TaskEntity>> = taskDoo.getAllTask()
 

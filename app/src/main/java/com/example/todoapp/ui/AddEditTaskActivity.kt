@@ -13,33 +13,30 @@ import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import com.example.todoapp.R
 import com.example.todoapp.databinding.ActivityAddEditTaskBinding
-import com.example.todoapp.data.TaskDatabase
 import com.example.todoapp.model.TaskEntity
-import com.example.todoapp.data.repository.TaskRepository
 import com.example.todoapp.utils.NotificationReceiver
 import com.example.todoapp.viewmodel.TaskViewModel
-import com.example.todoapp.viewmodel.TaskViewModelFactory
+import dagger.hilt.android.AndroidEntryPoint
 import java.text.SimpleDateFormat
 import java.util.Calendar
 import java.util.Date
 import java.util.Locale
 
+@AndroidEntryPoint
 class AddEditTaskActivity : AppCompatActivity() {
 
     // creating of variable instances
+    private val viewModel: TaskViewModel by viewModels()
     private lateinit var binding: ActivityAddEditTaskBinding
     private var taskId: Int? = null
     private var reminderTime: Long? = null
-    private val viewModel: TaskViewModel by viewModels() {
-        val db = TaskDatabase.getDatabase(this)
-        val repository = TaskRepository(db.taskDao())
-        TaskViewModelFactory(repository)
-    }
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityAddEditTaskBinding.inflate(layoutInflater)
         setContentView(binding.root)
+
 
         // setup Spinner
         ArrayAdapter.createFromResource(
@@ -52,7 +49,6 @@ class AddEditTaskActivity : AppCompatActivity() {
         }
 
         // updating of task by using the task id to fetch the task to be updated
-
         taskId = intent.getIntExtra("TASK_ID", -1).takeIf { it != -1 }
 
         taskId?.let {
