@@ -34,6 +34,7 @@ This Android application provides a simple and efficient way to manage your dail
 * **`repository`:** Contains the repository classes for interacting with data sources (like the Room database).
 * **`database`:** Contains the Room database setup (entities, DAOs, database class).
 * **`model`:** Contains data classes representing the app's data (e.g., Account, Transaction).
+* **`di`:** Contains module for dependency injection with dagger-hilt.
 
 # Testing
 The project includes unit tests for the `TaskViewModel` and potentially other components. To run the tests:
